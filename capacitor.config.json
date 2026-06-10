@@ -1,0 +1,12 @@
+{
+  "appId": "com.amiboli.app",
+  "appName": "Amiboli",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#FFFBF5"
+  }
+}
