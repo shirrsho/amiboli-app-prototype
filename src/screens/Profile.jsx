@@ -10,7 +10,7 @@ export default function Profile() {
   const showToast = useToast()
 
   const stats = [
-    { label: 'Chapters', value: user.chaptersCompleted, emoji: '📘' },
+    { label: 'Scenes', value: user.scenesCompleted, emoji: '📘' },
     { label: 'Duration', value: user.totalSpeakingTime, emoji: '⏱️' },
     { label: 'Avg score', value: user.avgScore, emoji: '⭐' },
     { label: 'Rank', value: `#${user.rank}`, emoji: '🏆' },

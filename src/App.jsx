@@ -8,6 +8,7 @@ import Splash from './screens/Splash'
 import Onboarding from './screens/Onboarding'
 import Auth from './screens/Auth'
 import Home from './screens/Home'
+import Book from './screens/Book'
 import Leaderboard from './screens/Leaderboard'
 import Profile from './screens/Profile'
 import Plans from './screens/Plans'
@@ -36,6 +37,9 @@ export default function App() {
             <Route path="/" element={<Splash />} />
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/auth" element={<Auth />} />
+
+            {/* A book's own immersive screen — full-screen, no tab bar */}
+            <Route path="/book/:id" element={<Book />} />
 
             {/* Main app with tab bar */}
             <Route element={<MainLayout />}>

@@ -6,7 +6,7 @@ import { plans } from '../data/dummyData'
 export default function Plans() {
   const showToast = useToast()
   const { free, pro, comparison } = plans
-  const usedPct = (free.chaptersUsed / free.chaptersCap) * 100
+  const usedPct = (free.booksUsed / free.booksCap) * 100
 
   return (
     <Screen title="Plans" subtitle="Power up your learning">
@@ -55,12 +55,12 @@ export default function Plans() {
           ))}
         </ul>
 
-        {/* Chapters usage bar */}
+        {/* Books usage bar */}
         <div className="mt-4">
           <div className="mb-1 flex justify-between text-sm font-extrabold text-ink">
-            <span>Chapters used</span>
+            <span>Books accessed</span>
             <span>
-              {free.chaptersUsed}/{free.chaptersCap}
+              {free.booksUsed}/{free.booksCap}
             </span>
           </div>
           <div className="h-3 w-full overflow-hidden rounded-full bg-black/5">

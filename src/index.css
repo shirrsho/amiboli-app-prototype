@@ -35,3 +35,5 @@ body {
     @apply font-display tracking-tight;
   }
 }
+
+/* Story ambient effects are framer-motion-driven (transform/opacity only). */

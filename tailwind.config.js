@@ -41,9 +41,11 @@ export default {
         cream: '#FFFBF5',
       },
       fontFamily: {
-        // Display = playful rounded; body = clean sans. Loaded via Google Fonts in index.html.
+        // Display = playful rounded; body = clean sans; serif = book prose on
+        // the story world Home. Loaded via Google Fonts in index.html.
         display: ['"Baloo 2"', 'system-ui', 'sans-serif'],
         body: ['Nunito', 'system-ui', 'sans-serif'],
+        serif: ['"Crimson Text"', 'Georgia', 'serif'],
       },
       boxShadow: {
         soft: '0 8px 24px -8px rgba(43,34,51,0.18)',

@@ -36,7 +36,7 @@ export default function DownloadButton({ variant = 'fab' }) {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={handleClick}
-          className="absolute bottom-[5.5rem] right-4 z-40 flex items-center gap-2 rounded-full bg-ink px-4 py-3 font-display text-sm font-extrabold text-white shadow-soft"
+          className="absolute bottom-4 right-4 z-40 flex items-center gap-1.5 rounded-full bg-ink/80 px-3 py-2 font-display text-xs font-extrabold text-white shadow-soft ring-1 ring-white/25 backdrop-blur-sm"
           aria-label="Download Amiboli"
         >
           <motion.span

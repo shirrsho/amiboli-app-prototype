@@ -4,6 +4,7 @@
 // ────────────────────────────────────────────────────────────────────────────
 
 // The active (already logged-in) user — mid-journey.
+// Scenes completed: 4 (Scarlet) + 1 (Girl on the Train) = 5.
 export const user = {
   name: 'Shirsho',
   initials: 'AA',
@@ -13,8 +14,8 @@ export const user = {
   plan: 'Free',
   energy: { current: 1, max: 2, resetsIn: '6h 24m' },
   streak: 2,
-  chaptersCompleted: 7,
-  totalSpeakingTime: '3h 42m',
+  scenesCompleted: 5,
+  totalSpeakingTime: '2h 40m',
   rank: 14,
   scores: {
     relevance: 82,
@@ -23,7 +24,7 @@ export const user = {
     grammar: 88,
   },
   avgScore: 78, // (82 + 64 + 78 + 88) / 4
-  totalScore: 4210,
+  totalScore: 3920, // keeps rank #14 (between Yuki 4,360 and Tomas 3,890)
   // Which days this week were active (Mon→Sun). 2-day streak.
   weeklyActivity: [true, true, false, true, true, false, false],
 }
@@ -36,75 +37,116 @@ export const skills = [
   { key: 'grammar', label: 'Grammar', color: '#FF8A1F', emoji: '📐' },
 ]
 
-// ── Story map: Books → Chapters ─────────────────────────────────────────────
-// status: 'completed' | 'current' | 'locked'
-// Book 1 (3 ch, all completed) + Book 2 ch1–4 completed = 7 completed total.
+// ── Books & scenes ──────────────────────────────────────────────────────────
+// Every book is accessible from the start (no sequential locking). The only
+// Free-plan limit is the 10-book cap, communicated in Plans.
+//
+// scene.status: 'completed' | 'current' | 'locked' ('locked' = not reached yet;
+// its name is hidden in fog on the Book screen — future scenes are spoilers).
+//
+// All scene names, recaps and narration lines are ORIGINAL text written for
+// this prototype — evocative of each book's premise, never quoting the novels.
 export const books = [
   {
-    id: 'b1',
-    title: 'The Gloria Scott',
-    emoji: '⛵',
-    accent: '#22C55E',
-    locked: false,
-    chapters: [
-      { id: 'b1c1', title: 'Chapter 1', status: 'completed', score: 84 },
-      { id: 'b1c2', title: 'Chapter 2', status: 'completed', score: 76 },
-      { id: 'b1c3', title: 'Chapter 3', status: 'completed', score: 81 },
-    ],
-  },
-  {
-    id: 'b2',
+    id: 'scarlet',
     title: 'A Study in Scarlet',
-    emoji: '🔬',
-    accent: '#FF8A1F',
-    locked: false,
-    chapters: [
-      { id: 'b2c1', title: 'Chapter 1', status: 'completed', score: 79 },
-      { id: 'b2c2', title: 'Chapter 2', status: 'completed', score: 85 },
-      { id: 'b2c3', title: 'Chapter 3', status: 'completed', score: 71 },
-      { id: 'b2c4', title: 'Chapter 4', status: 'completed', score: 83 },
-      { id: 'b2c5', title: 'Chapter 5', status: 'current' },
-      { id: 'b2c6', title: 'Chapter 6', status: 'locked' },
+    subtitle: 'A Sherlock Holmes story',
+    pitch: 'Solve a murder alongside the world’s sharpest detective.',
+    themeId: 'victorian-london',
+    recapText:
+      'Holmes hands you the telegram. “Lauriston Gardens,” he says. “There has been a murder — and this time, you do the talking.”',
+    introText:
+      'You arrive at 221B Baker Street as Holmes’s newest companion — just as a telegram brings news of a body in an empty house.',
+    scenes: [
+      {
+        id: 'sc1',
+        sceneName: 'The Telegram Arrives',
+        status: 'completed',
+        score: 84,
+        narrationAfter: 'A cab rattles through the fog toward Lauriston Gardens…',
+      },
+      {
+        id: 'sc2',
+        sceneName: 'A Word with the Constable',
+        status: 'completed',
+        score: 76,
+        narrationAfter: 'The constable lifts his lantern, and the door of Number 3 creaks open…',
+      },
+      {
+        id: 'sc3',
+        sceneName: 'The Empty House',
+        status: 'completed',
+        score: 81,
+        narrationAfter: 'In the dust of the bare room, something glints — a wedding ring…',
+      },
+      {
+        id: 'sc4',
+        sceneName: 'The Word on the Wall',
+        status: 'completed',
+        score: 79,
+        narrationAfter: 'Holmes studies the scrawled letters, then turns to you. “Now we find our cabman.”',
+      },
+      {
+        id: 'sc5',
+        sceneName: 'The Cabman’s Tale',
+        status: 'current',
+      },
+      {
+        id: 'sc6',
+        sceneName: 'The Avenger Unmasked', // hidden in fog until Scene 5 is done
+        status: 'locked',
+      },
     ],
   },
   {
-    id: 'b3',
-    title: 'The Sign of the Four',
-    emoji: '💎',
-    accent: '#0EA5E9',
-    locked: false, // visible, but every chapter grayed out / not started
-    chapters: [
-      { id: 'b3c1', title: 'Chapter 1', status: 'locked' },
-      { id: 'b3c2', title: 'Chapter 2', status: 'locked' },
-      { id: 'b3c3', title: 'Chapter 3', status: 'locked' },
-      { id: 'b3c4', title: 'Chapter 4', status: 'locked' },
-      { id: 'b3c5', title: 'Chapter 5', status: 'locked' },
+    id: 'train',
+    title: 'The Girl on the Train',
+    subtitle: 'Inspired by the thriller',
+    pitch: 'What you saw from the train window could solve a disappearance.',
+    themeId: 'rail-dusk',
+    recapText:
+      'Every morning you watch the same house from the 8:04. Today the news says the woman who lives there is missing — and you may be the last stranger who saw her.',
+    introText:
+      'You board the same commuter train every day, past the same row of houses — until one window shows you something you can’t forget.',
+    scenes: [
+      {
+        id: 'tr1',
+        sceneName: 'The 8:04 to London',
+        status: 'completed',
+        score: 72,
+        narrationAfter: 'The same houses slide past, day after day — until today…',
+      },
+      {
+        id: 'tr2',
+        sceneName: 'The Couple on the Terrace',
+        status: 'current',
+      },
+      { id: 'tr3', sceneName: 'A Gap in the Evening', status: 'locked' },
+      { id: 'tr4', sceneName: 'Questions at the Station', status: 'locked' },
+      { id: 'tr5', sceneName: 'What the Window Saw', status: 'locked' },
     ],
   },
-  // Books 4–6: collapsed / locked behind previous books.
   {
-    id: 'b4',
-    title: 'The Hound of the Baskervilles',
-    emoji: '🐾',
-    accent: '#8B5CF6',
-    locked: true,
-    chapters: [],
-  },
-  {
-    id: 'b5',
-    title: 'The Adventure of the Speckled Band',
-    emoji: '🐍',
-    accent: '#EF4444',
-    locked: true,
-    chapters: [],
-  },
-  {
-    id: 'b6',
-    title: 'The Red-Headed League',
-    emoji: '🎩',
-    accent: '#EC4899',
-    locked: true,
-    chapters: [],
+    id: 'mockingbird',
+    title: 'To Kill a Mockingbird',
+    subtitle: 'Inspired by the classic',
+    pitch: 'A small town, a big trial, and a child who sees it all.',
+    themeId: 'southern-summer',
+    recapText:
+      'The trial is the only thing anyone in town talks about — and tomorrow, you will sit in the gallery and hear it for yourself.',
+    introText:
+      'You arrive as the new kid in a sleepy Southern town. The summers are long, the neighbors whisper, and the quiet house at the end of the street keeps a secret.',
+    scenes: [
+      {
+        id: 'mb1',
+        sceneName: 'The New Kid in Town',
+        status: 'current', // first scene of a not-started book
+      },
+      { id: 'mb2', sceneName: 'A Dare at Dusk', status: 'locked' },
+      { id: 'mb3', sceneName: 'Whispers on the Porch', status: 'locked' },
+      { id: 'mb4', sceneName: 'The Courtroom Gallery', status: 'locked' },
+      { id: 'mb5', sceneName: 'The Walk Home', status: 'locked' },
+    ],
   },
 ]
 
@@ -131,7 +173,7 @@ export const leaderboardUsers = [
   makeUser('Priya', 'PR', '#E11D48', 80, 78, 81, 81, 4520),
   makeUser('Yuki', 'YU', '#6366F1', 79, 77, 80, 80, 4360),
   // Shirsho — the active user (rank #14 by avg). isMe flag highlights the row.
-  { ...makeUser('Shirsho', 'AA', '#FF8A1F', 82, 64, 78, 88, 4210), isMe: true },
+  { ...makeUser('Shirsho', 'AA', '#FF8A1F', 82, 64, 78, 88, 3920), isMe: true },
   makeUser('Tomas', 'TO', '#64748B', 74, 70, 76, 76, 3890),
 ]
 
@@ -163,7 +205,7 @@ export const suggestions = [
   },
   {
     emoji: '🔁',
-    title: 'Replay Chapter 3 of A Study in Scarlet',
+    title: 'Replay Scene 2 of A Study in Scarlet',
     body: 'Your smoothness dipped there — a great spot to rebuild flow.',
   },
   {
@@ -174,17 +216,19 @@ export const suggestions = [
 ]
 
 // ── Plans ───────────────────────────────────────────────────────────────────
+// Free limits: energy per scene + a 10-book cap. No book is locked in the
+// prototype (only 3 books exist) — the cap is just communicated.
 export const plans = {
   free: {
     name: 'Free',
     tagline: 'Energy-based learning',
     energy: { current: 1, max: 2, resetsEvery: '12 hours' },
     rules: [
-      'Full energy completes 2 chapters',
-      'Max 20 chapters in free mode',
+      'Full energy completes 2 scenes',
+      'Access up to 10 books on Free, unlimited on Pro',
     ],
-    chaptersUsed: 7,
-    chaptersCap: 20,
+    booksUsed: 2, // books started so far
+    booksCap: 10,
   },
   pro: {
     name: 'Pro',
@@ -193,14 +237,14 @@ export const plans = {
     badge: 'MOST POPULAR',
     perks: [
       'Unlimited energy',
-      'Unlimited chapters',
+      'Unlimited books',
       'Priority new stories',
       'Detailed skill analytics',
     ],
   },
   comparison: [
     { feature: 'Energy', free: '2 bolts / 12h', pro: 'Unlimited' },
-    { feature: 'Chapters', free: 'Up to 20', pro: 'Unlimited' },
+    { feature: 'Books', free: 'Up to 10', pro: 'Unlimited' },
     { feature: 'New stories', free: 'Standard', pro: 'Priority' },
     { feature: 'Skill analytics', free: 'Basic', pro: 'Detailed' },
   ],
@@ -212,21 +256,21 @@ export const notifications = [
     id: 'n1',
     emoji: '☀️',
     title: 'Ready for today’s story?',
-    body: 'Chapter 5 of A Study in Scarlet is waiting for you.',
+    body: 'Scene 5 of A Study in Scarlet is waiting for you.',
     time: '2h ago',
   },
   {
     id: 'n2',
     emoji: '🔥',
     title: 'Your streak is in danger!',
-    body: 'Keep your 5-day streak alive — speak before midnight.',
+    body: 'Keep your 2-day streak alive — speak before midnight.',
     time: '5h ago',
     urgent: true,
   },
   {
     id: 'n3',
     emoji: '🏆',
-    title: 'Tintin just scored 96 on The Gloria Scott!',
+    title: 'Tintin just scored 96 on A Study in Scarlet!',
     body: 'Can you beat that? Climb the leaderboard.',
     time: '1d ago',
   },
@@ -234,7 +278,7 @@ export const notifications = [
     id: 'n4',
     emoji: '⚡',
     title: 'Energy refilled',
-    body: 'You have 1 bolt ready. Time for a chapter!',
+    body: 'You have 1 bolt ready. Time for a scene!',
     time: '1d ago',
   },
 ]
