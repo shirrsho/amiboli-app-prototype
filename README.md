@@ -132,6 +132,84 @@ The main app is a **5-tab bottom bar**: **Home · Leaderboard · Profile · Plan
 
 ---
 
+## 🎭 Authoring a scene (the beat player + shadow-theatre stage)
+
+One scene is fully playable: **A Study in Scarlet, Scene 5** (`/play/scarlet/sc5`).
+The Play screen is a **generic beat player** with a **shadow-theatre stage** —
+silhouette characters posing inside an illustrated SVG set, directed entirely
+by the beat data in [`src/data/scenes.js`](src/data/scenes.js). No code changes
+are needed to author new scenes.
+
+### Beat format
+
+```js
+{
+  id: 'sc5', bookId: 'scarlet', sceneNumber: 5, title: 'The Cabman’s Tale',
+  setId: 'lauriston-room',          // which stage set to build (see Stage.jsx)
+  npc: { name: 'Holmes' },          // the main other character
+  beats: [
+    { type: 'narration', text: '…', stage: {…} },
+    { type: 'npc_line', speaker: 'Holmes', text: '…', stage: {…} },
+    { type: 'user_turn',
+      intent: 'Tell Holmes what you noticed',           // the prompt
+      suggestedLine: 'The window was forced…',          // ghost line
+      simulated: {
+        transcript: '…',                                // "what you said"
+        scores: { relevance, smoothness, clarity, grammar },  // 0–100
+        npcReaction: 'Holmes nods slowly.',             // shown on stage
+        mood: 'impressed' | 'neutral' | 'puzzled',      // drives the NPC's pose
+        isBigMoment: true,                              // → revelation lighting + chime
+      },
+      stage: {…} },
+  ],
+}
+```
+
+### Stage directions (`stage`, optional on any beat)
+
+Applied at the start of the beat. All fields optional — omitted fields keep the
+current state; unknown names no-op gracefully (write cues for effects that
+don't exist yet).
+
+| Field | Values |
+| --- | --- |
+| `camera` | `wide` (default) · `holmes` · `you` · `constable` · `window` · `wallWriting` · `lamp` · `door` — one slow film-drift per beat |
+| `highlight` | `window` · `wallWriting` · `lamp` · `door` — a ~2s brighten/pulse on the prop |
+| `lighting` | `calm` (default) · `tense` (dim, cool) · `revelation` (bright, warm) — crossfades |
+| `poses` | `{ holmes: 'speaking', you: { pose: 'pointing', target: 'right' } }` |
+| `enter` / `exit` | character id walks on / off stage (e.g. `'constable'`) |
+
+**Poses:** `idle` · `speaking` · `pointing` (with `target: 'left' | 'right' | 'up'`)
+· `impressed` · `puzzled`. Pointing left/right turns the whole figure.
+
+**Auto-direction** (no data needed): the speaker of an `npc_line` poses
+`speaking`; on a `user_turn` the camera drifts to `you` and they get the lit
+rim; after the turn the NPC re-poses from `simulated.mood`; big moments switch
+lighting to `revelation`. Idle life (breathing, occasional head turns,
+talk-bob synced to the typewriter) is always on.
+
+### Adding a new set / character (same style, other books)
+
+- **Characters** live in [`Character.jsx`](src/components/play/Character.jsx):
+  add an entry to `CHARACTERS` with four shape groups (`body`, `head`,
+  `frontArm`, `backArm`) drawn in a 120×230 box, feet on the baseline, facing
+  right. Use flat `SILHOUETTE` fills only — identity comes from hat/coat/prop
+  shapes, never faces. Poses, breathing, glow and walk-in come for free.
+- **Sets** live in [`Stage.jsx`](src/components/play/Stage.jsx): draw a new set
+  component (flat fills, 3–4 tones of the book's palette, fake glows from
+  stacked semi-transparent circles — **no SVG filters, no images**), then
+  register its camera targets in `CAMERAS`, prop zones in `PROPS`, and slots in
+  `SLOTS` under a new `setId`.
+- Guardrails: at most one camera move or highlight per beat; fog (or the book's
+  one ambient effect) is the only constant motion; animate transforms/opacity
+  only.
+
+Pacing that feels right: ~12–16 beats with 3–5 user turns, scores telling an
+arc. Scoring is **simulated**; the mic is real (live waveform), with an
+automatic Hold-to-speak fallback when no mic is available.
+
+---
+
 ## 📂 Folder structure
 
 ```

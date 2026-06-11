@@ -7,6 +7,7 @@ import { SealedScene, CurrentScene, FogScene, NarrationLine } from '../component
 import { useToast } from '../components/ToastProvider'
 import { books } from '../data/dummyData'
 import { getTheme } from '../data/bookThemes'
+import { getPlayableScene } from '../data/scenes'
 
 // Level 2: one book's own immersive screen (/book/:id).
 // Fully themed world + recap/intro card + the vertical scene path.
@@ -25,9 +26,18 @@ export default function Book() {
   const started = scenes.some((s) => s.status === 'completed')
   const currentNo = scenes.findIndex((s) => s.status === 'current') + 1
 
+  // The current scene plays for real if it has authored beat data
+  // (src/data/scenes.js); every other tap stays a toast.
+  const currentScene = scenes.find((s) => s.status === 'current')
+  const playable = currentScene ? getPlayableScene(book.id, currentScene.id) : null
+  const continueStory = () => {
+    if (playable) navigate(`/play/${book.id}/${playable.id}`)
+    else showToast('Story mode coming soon', '🎬')
+  }
+
   const tapScene = (status) => {
     if (status === 'completed') showToast('This scene is already sealed', '📜')
-    else if (status === 'current') showToast('Story mode coming soon', '🎬')
+    else if (status === 'current') continueStory()
     else showToast('The fog hasn’t lifted yet', '🌫️')
   }
 
@@ -58,7 +68,7 @@ export default function Book() {
           theme={theme}
           started={started}
           currentSceneNo={currentNo}
-          onCta={() => showToast('Story mode coming soon', '🎬')}
+          onCta={continueStory}
         />
 
         {/* The scene path: a single centered column on a dotted line */}

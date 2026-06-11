@@ -9,6 +9,7 @@ import Onboarding from './screens/Onboarding'
 import Auth from './screens/Auth'
 import Home from './screens/Home'
 import Book from './screens/Book'
+import Play from './screens/Play'
 import Leaderboard from './screens/Leaderboard'
 import Profile from './screens/Profile'
 import Plans from './screens/Plans'
@@ -40,6 +41,9 @@ export default function App() {
 
             {/* A book's own immersive screen — full-screen, no tab bar */}
             <Route path="/book/:id" element={<Book />} />
+
+            {/* The Stage: playing one scene (proof of concept) */}
+            <Route path="/play/:bookId/:sceneId" element={<Play />} />
 
             {/* Main app with tab bar */}
             <Route element={<MainLayout />}>
