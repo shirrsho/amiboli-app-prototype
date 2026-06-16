@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Scenery from '../components/story/Scenery'
 import { WaxSeal } from '../components/story/SceneNodes'
+import StreakBurst from '../components/StreakBurst'
 import { getPlayableScene } from '../data/scenes'
 import { getBookById, user, skills } from '../data/dummyData'
 import { getTheme } from '../data/bookThemes'
@@ -49,6 +50,7 @@ export default function Score() {
   const newTotal = user.totalScore + pointsEarned
   const elapsed = state?.elapsed ?? 168
   const time = `${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, '0')}`
+  const newStreak = user.streak + 1 // completing the scene extends the streak
 
   const Card = ({ children, delay = 0, className = '' }) => (
     <motion.div
@@ -69,7 +71,17 @@ export default function Score() {
       <div className="absolute inset-0" style={{ background: 'rgba(6,9,18,0.55)' }} />
 
       <main className="no-scrollbar relative z-10 flex-1 overflow-y-auto px-5 pb-32 pt-[max(1.5rem,env(safe-area-inset-top))]">
-        {/* ── Hero: the seal stamps the average ── */}
+        {/* ── Hero: streak increases (the celebration) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-5 rounded-3xl border p-4 backdrop-blur-md"
+          style={{ background: p.panel, borderColor: p.panelBorder }}
+        >
+          <StreakBurst from={user.streak} to={newStreak} color={p.accent} />
+        </motion.div>
+
+        {/* ── Result: the seal stamps the average ── */}
         <div className="flex flex-col items-center pt-2 text-center">
           <motion.div
             initial={{ scale: 2.4, opacity: 0, rotate: -16 }}
@@ -122,7 +134,7 @@ export default function Score() {
             <div className="mt-3 flex items-center gap-2 rounded-2xl bg-black/20 px-3 py-2">
               <span className="text-lg">🔥</span>
               <span className="text-[13px] font-extrabold" style={{ color: p.textOnBg }}>
-                {user.streak}-day streak kept alive
+                Streak extended to {newStreak} days
               </span>
             </div>
           </Card>
@@ -237,11 +249,11 @@ export default function Score() {
         </button>
         <motion.button
           whileTap={{ scale: 0.96 }}
-          onClick={() => navigate(`/ad/${book.id}/${scene.id}`, { state: { next: '/leaderboard' } })}
+          onClick={() => navigate(`/book/${book.id}`)}
           className="flex-1 rounded-2xl py-3.5 font-display text-base font-extrabold"
           style={{ background: `linear-gradient(135deg, ${p.accent}, ${p.accentDeep})`, color: p.ctaText }}
         >
-          Continue →
+          Back to the story →
         </motion.button>
       </div>
     </div>

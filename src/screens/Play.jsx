@@ -335,10 +335,12 @@ function Player({ scene, book, onReplay }) {
                 key="summary"
                 scene={scene}
                 theme={theme}
-                averages={averages}
                 sceneAvg={sceneAvg}
-                elapsed={elapsed}
-                onResults={() => navigate(`/score/${book.id}/${scene.id}`, { state: { elapsed } })}
+                onContinue={() =>
+                  navigate(`/ad/${book.id}/${scene.id}`, {
+                    state: { next: `/score/${book.id}/${scene.id}`, nextState: { elapsed } },
+                  })
+                }
                 onReplay={onReplay}
               />
             ) : isStoryBeat ? (
@@ -499,61 +501,27 @@ function PanelFeedback({ sim, theme }) {
   )
 }
 
-// End-of-scene summary, morphing inside the same panel.
-function PanelSummary({ scene, theme, averages, sceneAvg, elapsed, onResults, onReplay }) {
+// End-of-scene "scene complete" beat. Keeps the seal-stamp moment but NOT the
+// score breakdown — that lives on the result screen, shown after the ad.
+function PanelSummary({ scene, theme, sceneAvg, onContinue, onReplay }) {
   const p = theme.palette
-  const weakest = skills.reduce((a, b) => (averages[a.key] <= averages[b.key] ? a : b))
-  const COACH = {
-    relevance: 'Keep each line tied to what is happening — you drifted once or twice.',
-    smoothness: 'Your pauses got shorter as the scene went on — keep it up.',
-    clarity: 'Shape the long words a little more — your clarity will jump.',
-    grammar: 'Watch your tenses in the fast moments — slow down half a beat.',
-  }
-  const mins = Math.floor(elapsed / 60)
-  const secs = String(elapsed % 60).padStart(2, '0')
   return (
     <motion.div {...modeAnim} className="flex h-full flex-col">
-      <div className="flex items-center gap-3">
+      <div className="flex flex-1 flex-col items-center justify-center text-center">
         <motion.div
           initial={{ scale: 2.2, opacity: 0, rotate: -14 }}
           animate={{ scale: 1, opacity: 1, rotate: 0 }}
           transition={{ type: 'spring', stiffness: 320, damping: 16, delay: 0.15 }}
         >
-          <WaxSeal score={sceneAvg} color={theme.sealColor} size={56} />
+          <WaxSeal score={sceneAvg} color={theme.sealColor} size={64} />
         </motion.div>
-        <div className="min-w-0">
-          <h2 className="font-serif text-[20px] font-bold leading-tight" style={{ color: p.textOnBg }}>
-            Scene sealed
-          </h2>
-          <p className="text-[11px] font-bold" style={{ color: p.textMuted }}>
-            Scene {scene.sceneNumber} · {scene.title} · {mins}:{secs}
-          </p>
-        </div>
+        <h2 className="mt-3 font-serif text-[22px] font-bold leading-tight" style={{ color: p.textOnBg }}>
+          Scene complete!
+        </h2>
+        <p className="mt-1 text-[12px] font-bold" style={{ color: p.textMuted }}>
+          Scene {scene.sceneNumber} · {scene.title}
+        </p>
       </div>
-
-      <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1.5">
-        {skills.map((s) => (
-          <div key={s.key}>
-            <div className="flex justify-between text-[10px] font-extrabold" style={{ color: p.textMuted }}>
-              <span>{s.label}</span>
-              <span style={{ color: p.textOnBg }}>{averages[s.key]}</span>
-            </div>
-            <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
-              <motion.div
-                className="h-full rounded-full"
-                style={{ background: s.color }}
-                initial={{ width: 0 }}
-                animate={{ width: `${averages[s.key]}%` }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <p className="mt-2.5 font-serif text-[13px] italic leading-snug" style={{ color: p.textMuted }}>
-        {COACH[weakest.key]}
-      </p>
 
       <div className="mt-auto flex gap-2 pb-1">
         <button
@@ -564,11 +532,11 @@ function PanelSummary({ scene, theme, averages, sceneAvg, elapsed, onResults, on
           Replay scene
         </button>
         <button
-          onClick={onResults}
+          onClick={onContinue}
           className="flex-1 rounded-xl py-2.5 text-sm font-extrabold"
           style={{ background: `linear-gradient(135deg, ${p.accent}, ${p.accentDeep})`, color: p.ctaText }}
         >
-          See your results →
+          Continue →
         </button>
       </div>
     </motion.div>

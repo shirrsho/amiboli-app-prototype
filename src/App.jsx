@@ -4,6 +4,7 @@ import PhoneFrame from './components/PhoneFrame'
 import BottomTabBar from './components/BottomTabBar'
 import ToastProvider from './components/ToastProvider'
 import LibraryProvider from './components/LibraryProvider'
+import EnergyProvider from './components/EnergyProvider'
 
 import Splash from './screens/Splash'
 import Onboarding from './screens/Onboarding'
@@ -35,7 +36,8 @@ export default function App() {
   const location = useLocation()
   return (
     <PhoneFrame>
-      <LibraryProvider>
+      <EnergyProvider>
+       <LibraryProvider>
         <ToastProvider>
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
@@ -66,7 +68,8 @@ export default function App() {
             </Routes>
           </AnimatePresence>
         </ToastProvider>
-      </LibraryProvider>
+       </LibraryProvider>
+      </EnergyProvider>
     </PhoneFrame>
   )
 }

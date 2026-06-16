@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useEnergy } from '../components/EnergyProvider'
 
 // Mock interstitial ad shown on the Free plan — between finished scenes AND when
 // a player leaves a scene early. No real ad SDK; it's a believable placeholder
@@ -12,6 +13,7 @@ const SKIP_SECONDS = 5
 export default function Ad() {
   const navigate = useNavigate()
   const { state } = useLocation()
+  const energy = useEnergy()
   const next = state?.next ?? '/leaderboard'
   const [left, setLeft] = useState(SKIP_SECONDS)
 
@@ -22,7 +24,12 @@ export default function Ad() {
   }, [left])
 
   const done = left <= 0
-  const finish = () => navigate(next)
+  const finish = () => {
+    // reward the user for watching (e.g. +1 energy), then continue. `nextState`
+    // forwards data (like the scene timer) to the next screen.
+    if (state?.reward === 'energy') energy?.addViaAd()
+    navigate(next, state?.nextState ? { state: state.nextState } : undefined)
+  }
 
   return (
     <div className="relative flex h-full flex-col bg-[#0b0e1c] text-white">

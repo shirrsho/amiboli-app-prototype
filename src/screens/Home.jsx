@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import HomeTopBar from '../components/HomeTopBar'
 import NotificationsSheet from '../components/NotificationsSheet'
-import DownloadButton from '../components/DownloadButton'
+import EnergySheet from '../components/EnergySheet'
 import Scenery from '../components/story/Scenery'
 import { useLibrary } from '../components/LibraryProvider'
 import { books } from '../data/dummyData'
@@ -14,6 +14,7 @@ import { getTheme } from '../data/bookThemes'
 // Tapping a book (or its button) opens its own themed screen at /book/:id.
 export default function Home() {
   const [sheetOpen, setSheetOpen] = useState(false)
+  const [energyOpen, setEnergyOpen] = useState(false)
   const [active, setActive] = useState(0)
   const feedRef = useRef(null)
   const ticking = useRef(false)
@@ -38,7 +39,10 @@ export default function Home() {
     <div className="relative flex min-h-0 flex-1 flex-col" style={{ background: '#10141f' }}>
       {/* Status bar floats over every section, consistent across themes */}
       <div className="absolute inset-x-0 top-0 z-30">
-        <HomeTopBar onOpenNotifications={() => setSheetOpen(true)} />
+        <HomeTopBar
+          onOpenNotifications={() => setSheetOpen(true)}
+          onOpenEnergy={() => setEnergyOpen(true)}
+        />
       </div>
 
       <main
@@ -76,8 +80,8 @@ export default function Home() {
         ))}
       </div>
 
-      <DownloadButton variant="fab" />
       <NotificationsSheet open={sheetOpen} onClose={() => setSheetOpen(false)} />
+      <EnergySheet open={energyOpen} onClose={() => setEnergyOpen(false)} />
     </div>
   )
 }

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Screen from '../components/Screen'
-import DownloadButton from '../components/DownloadButton'
 import { useToast } from '../components/ToastProvider'
 import { appVersion } from '../data/dummyData'
 
@@ -15,11 +14,6 @@ export default function Settings() {
 
   return (
     <Screen title="Settings">
-      {/* Install / download the app as a PWA */}
-      <div className="mb-3">
-        <DownloadButton variant="row" />
-      </div>
-
       {/* Group: account */}
       <Group>
         <Row icon="👤" label="Account" onClick={() => showToast('Account settings coming soon', '👤')} />
