@@ -43,6 +43,16 @@ export default function HomeTopBar({ onOpenNotifications }) {
       <motion.button whileTap={{ scale: 0.85 }} onClick={() => navigate('/profile')} aria-label="Profile">
         <Avatar initials={user.initials} color={user.avatarColor} size={40} ring />
       </motion.button>
+
+      {/* Settings lives in the top-right corner (moved off the bottom tab bar) */}
+      <motion.button
+        whileTap={{ scale: 0.85 }}
+        onClick={() => navigate('/settings')}
+        className="grid h-10 w-10 place-items-center rounded-full bg-black/35 text-lg backdrop-blur-md"
+        aria-label="Settings"
+      >
+        ⚙️
+      </motion.button>
     </header>
   )
 }

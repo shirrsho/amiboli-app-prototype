@@ -223,7 +223,9 @@ function Player({ scene, book, onReplay }) {
                 Leave the scene?
               </span>
               <button
-                onClick={() => navigate(`/book/${book.id}`)}
+                onClick={() =>
+                  navigate(`/ad/${book.id}/${scene.id}`, { state: { next: `/book/${book.id}` } })
+                }
                 className="rounded-full bg-red-500/90 px-4 py-1.5 text-sm font-extrabold text-white"
               >
                 Leave
@@ -336,7 +338,7 @@ function Player({ scene, book, onReplay }) {
                 averages={averages}
                 sceneAvg={sceneAvg}
                 elapsed={elapsed}
-                onBack={() => navigate(`/book/${book.id}`)}
+                onResults={() => navigate(`/score/${book.id}/${scene.id}`, { state: { elapsed } })}
                 onReplay={onReplay}
               />
             ) : isStoryBeat ? (
@@ -498,7 +500,7 @@ function PanelFeedback({ sim, theme }) {
 }
 
 // End-of-scene summary, morphing inside the same panel.
-function PanelSummary({ scene, theme, averages, sceneAvg, elapsed, onBack, onReplay }) {
+function PanelSummary({ scene, theme, averages, sceneAvg, elapsed, onResults, onReplay }) {
   const p = theme.palette
   const weakest = skills.reduce((a, b) => (averages[a.key] <= averages[b.key] ? a : b))
   const COACH = {
@@ -562,11 +564,11 @@ function PanelSummary({ scene, theme, averages, sceneAvg, elapsed, onBack, onRep
           Replay scene
         </button>
         <button
-          onClick={onBack}
+          onClick={onResults}
           className="flex-1 rounded-xl py-2.5 text-sm font-extrabold"
           style={{ background: `linear-gradient(135deg, ${p.accent}, ${p.accentDeep})`, color: p.ctaText }}
         >
-          Back to the story
+          See your results →
         </button>
       </div>
     </motion.div>

@@ -150,6 +150,146 @@ export const books = [
   },
 ]
 
+// ── Store: premium books you can buy ────────────────────────────────────────
+// Showcased in the Store tab. "Buying" (no real payment) adds the book to the
+// user's library in memory (see LibraryProvider) so it appears on Home. Each
+// has the full book shape so Home / Book screens render it like a free book;
+// titles are public-domain, all pitch/intro/scene text is ORIGINAL.
+// `tag` drives the corner badge; `priceValue` is for sorting only.
+const freshScenes = (names) =>
+  names.map((sceneName, i) => ({
+    id: `s${i + 1}`,
+    sceneName,
+    status: i === 0 ? 'current' : 'locked',
+  }))
+
+export const storeBooks = [
+  {
+    id: 'dracula',
+    title: 'Dracula',
+    subtitle: 'A Gothic horror, inspired by Bram Stoker',
+    pitch: 'Trade letters and warnings as a count’s shadow falls over London.',
+    price: '$3.99',
+    priceValue: 3.99,
+    tag: 'Bestseller',
+    coverEmoji: '🦇',
+    themeId: 'victorian-london',
+    introText:
+      'You arrive at a remote castle as the guest of a courteous host — and slowly realise the doors only lock from the outside.',
+    scenes: freshScenes([
+      'The Road to the Castle',
+      'A Guest Who Cannot Leave',
+      'Three Whispers at Midnight',
+      'The Crossing to Whitby',
+      'The Hunt Begins',
+    ]),
+  },
+  {
+    id: 'frankenstein',
+    title: 'Frankenstein',
+    subtitle: 'A science tragedy, inspired by Mary Shelley',
+    pitch: 'Give a voice to the creature everyone else refuses to hear.',
+    price: '$3.99',
+    priceValue: 3.99,
+    tag: 'Editor’s pick',
+    coverEmoji: '⚡',
+    themeId: 'rail-dusk',
+    introText:
+      'You are the only one who will sit and speak with the creature — and the only one who might understand what it wants.',
+    scenes: freshScenes([
+      'The Lantern in the Lab',
+      'First Words',
+      'The Village That Ran',
+      'A Plea by the Glacier',
+      'The Promise',
+    ]),
+  },
+  {
+    id: 'pride',
+    title: 'Pride and Prejudice',
+    subtitle: 'A romance of manners, inspired by Jane Austen',
+    pitch: 'Win the conversation — and maybe more — one sharp reply at a time.',
+    price: '$2.99',
+    priceValue: 2.99,
+    tag: 'Romance',
+    coverEmoji: '💌',
+    themeId: 'southern-summer',
+    introText:
+      'You step into a crowded ballroom where everything is decided by what is said — and what is left unsaid.',
+    scenes: freshScenes([
+      'An Unfortunate First Impression',
+      'A Letter Misread',
+      'The Garden Walk',
+      'A Proposal, Badly Timed',
+      'Setting It Right',
+    ]),
+  },
+  {
+    id: 'holmes2',
+    title: 'The Sign of the Four',
+    subtitle: 'A Sherlock Holmes story',
+    pitch: 'A treasure, a betrayal, and a chase down the Thames at night.',
+    price: '$4.99',
+    priceValue: 4.99,
+    tag: 'New',
+    coverEmoji: '💎',
+    themeId: 'victorian-london',
+    introText:
+      'A frightened client lays six pearls on the table and asks you and Holmes to explain six years of silence.',
+    scenes: freshScenes([
+      'Six Pearls in Six Years',
+      'The Locked Study',
+      'A Word with the Watchman',
+      'The Boat on the Black Water',
+      'The Last Confession',
+    ]),
+  },
+  {
+    id: 'treasure',
+    title: 'Treasure Island',
+    subtitle: 'A high-seas adventure, inspired by R. L. Stevenson',
+    pitch: 'Talk your way past pirates with a map they would kill to hold.',
+    price: '$2.99',
+    priceValue: 2.99,
+    tag: 'Adventure',
+    coverEmoji: '🏴‍☠️',
+    themeId: 'rail-dusk',
+    introText:
+      'You sign aboard a ship where half the crew has a secret — and the map in your pocket is the biggest one.',
+    scenes: freshScenes([
+      'The Map in the Sea-Chest',
+      'A Berth Among Strangers',
+      'Apples and Eavesdropping',
+      'The Island Ashore',
+      'Holding the Stockade',
+    ]),
+  },
+  {
+    id: 'alice',
+    title: 'Alice in Wonderland',
+    subtitle: 'A nonsense fantasy, inspired by Lewis Carroll',
+    pitch: 'Hold a conversation where every rule changes mid-sentence.',
+    price: '$1.99',
+    priceValue: 1.99,
+    tag: 'Whimsical',
+    coverEmoji: '🐇',
+    themeId: 'southern-summer',
+    introText:
+      'You follow a hurried rabbit down a hole and land in a place where the only way out is to keep talking.',
+    scenes: freshScenes([
+      'Down the Rabbit Hole',
+      'A Very Confusing Tea',
+      'The Caterpillar’s Question',
+      'Croquet with the Queen',
+      'The Trial',
+    ]),
+  },
+]
+
+// Find any book (free or store) by id — used by Home and the Book screen.
+export const getBookById = (id) =>
+  books.find((b) => b.id === id) ?? storeBooks.find((b) => b.id === id) ?? null
+
 // ── Leaderboard ─────────────────────────────────────────────────────────────
 // Per-user skill scores; avg + total precomputed so filters just re-sort.
 // Shirsho sits at rank #14 by Avg Score. 15 entries total.

@@ -5,7 +5,7 @@ import Scenery from '../components/story/Scenery'
 import StoryCard from '../components/story/StoryCard'
 import { SealedScene, CurrentScene, FogScene, NarrationLine } from '../components/story/SceneNodes'
 import { useToast } from '../components/ToastProvider'
-import { books } from '../data/dummyData'
+import { getBookById } from '../data/dummyData'
 import { getTheme } from '../data/bookThemes'
 import { getPlayableScene } from '../data/scenes'
 
@@ -17,7 +17,7 @@ export default function Book() {
   const navigate = useNavigate()
   const showToast = useToast()
 
-  const book = books.find((b) => b.id === id)
+  const book = getBookById(id)
   if (!book) return <Navigate to="/home" replace />
 
   const theme = getTheme(book.themeId)

@@ -5,6 +5,7 @@ import HomeTopBar from '../components/HomeTopBar'
 import NotificationsSheet from '../components/NotificationsSheet'
 import DownloadButton from '../components/DownloadButton'
 import Scenery from '../components/story/Scenery'
+import { useLibrary } from '../components/LibraryProvider'
 import { books } from '../data/dummyData'
 import { getTheme } from '../data/bookThemes'
 
@@ -17,6 +18,10 @@ export default function Home() {
   const feedRef = useRef(null)
   const ticking = useRef(false)
   const navigate = useNavigate()
+  const { ownedBooks } = useLibrary()
+
+  // Free books + any stories bought from the Store (in memory).
+  const feed = [...books, ...ownedBooks]
 
   // Track which book section is in view (for the right-edge page dots).
   const onScroll = () => {
@@ -41,21 +46,28 @@ export default function Home() {
         onScroll={onScroll}
         className="no-scrollbar min-h-0 flex-1 snap-y snap-mandatory overflow-y-auto"
       >
-        {books.map((book) => (
+        {feed.map((book) => (
           <BookSection key={book.id} book={book} onOpen={() => navigate(`/book/${book.id}`)} />
         ))}
 
-        {/* Final section: what's next */}
+        {/* Final section: get more from the store */}
         <section className="relative flex h-full snap-start flex-col items-center justify-center gap-3 px-10 text-center">
-          <span className="text-5xl">📚</span>
-          <h2 className="font-serif text-3xl font-bold text-[#f3ead9]">More stories coming soon</h2>
-          <p className="text-sm font-bold text-[#f3ead9]/55">Free plan: access up to 10 books</p>
+          <span className="text-5xl">🛍️</span>
+          <h2 className="font-serif text-3xl font-bold text-[#f3ead9]">Want more stories?</h2>
+          <p className="text-sm font-bold text-[#f3ead9]/55">Browse premium books in the Store</p>
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/store')}
+            className="mt-1 rounded-2xl bg-brand-500 px-6 py-3 font-display text-base font-extrabold text-white shadow-pop"
+          >
+            Open the Store →
+          </motion.button>
         </section>
       </main>
 
       {/* Right-edge page indicator (one dot per section) */}
       <div className="absolute right-2.5 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center gap-1.5">
-        {[...books, null].map((_, i) => (
+        {[...feed, null].map((_, i) => (
           <span
             key={i}
             className="w-1.5 rounded-full bg-white transition-all duration-300"
