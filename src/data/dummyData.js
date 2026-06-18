@@ -12,7 +12,7 @@ export const user = {
   joinedDaysAgo: 24,
   joinedText: '24 days ago',
   plan: 'Free',
-  energy: { current: 1, max: 2, resetsIn: '6h 24m' },
+  energy: { current: 1, max: 4, resetsIn: '6h 24m' },
   streak: 2,
   scenesCompleted: 5,
   totalSpeakingTime: '2h 40m',
@@ -362,9 +362,9 @@ export const plans = {
   free: {
     name: 'Free',
     tagline: 'Energy-based learning',
-    energy: { current: 1, max: 2, resetsEvery: '12 hours' },
+    energy: { current: 1, max: 4, resetsEvery: '12 hours' },
     rules: [
-      'Full energy completes 2 scenes',
+      'Full energy completes 4 scenes',
       'Access up to 10 books on Free, unlimited on Pro',
     ],
     booksUsed: 2, // books started so far
@@ -383,7 +383,7 @@ export const plans = {
     ],
   },
   comparison: [
-    { feature: 'Energy', free: '2 bolts / 12h', pro: 'Unlimited' },
+    { feature: 'Energy', free: '4 bolts / 12h', pro: 'Unlimited' },
     { feature: 'Books', free: 'Up to 10', pro: 'Unlimited' },
     { feature: 'New stories', free: 'Standard', pro: 'Priority' },
     { feature: 'Skill analytics', free: 'Basic', pro: 'Detailed' },

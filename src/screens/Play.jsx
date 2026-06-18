@@ -223,9 +223,7 @@ function Player({ scene, book, onReplay }) {
                 Leave the scene?
               </span>
               <button
-                onClick={() =>
-                  navigate(`/ad/${book.id}/${scene.id}`, { state: { next: `/book/${book.id}` } })
-                }
+                onClick={() => navigate(`/book/${book.id}`)}
                 className="rounded-full bg-red-500/90 px-4 py-1.5 text-sm font-extrabold text-white"
               >
                 Leave
@@ -336,11 +334,7 @@ function Player({ scene, book, onReplay }) {
                 scene={scene}
                 theme={theme}
                 sceneAvg={sceneAvg}
-                onContinue={() =>
-                  navigate(`/ad/${book.id}/${scene.id}`, {
-                    state: { next: `/score/${book.id}/${scene.id}`, nextState: { elapsed } },
-                  })
-                }
+                onContinue={() => navigate(`/score/${book.id}/${scene.id}`, { state: { elapsed } })}
                 onReplay={onReplay}
               />
             ) : isStoryBeat ? (

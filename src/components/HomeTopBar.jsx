@@ -15,14 +15,10 @@ export default function HomeTopBar({ onOpenNotifications, onOpenEnergy }) {
 
   return (
     <header className="flex items-center justify-between gap-2 px-4 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))]">
-      {/* Energy — tap to open the energy sheet */}
+      {/* Energy — single bolt + count; tap to open the energy sheet */}
       <motion.button whileTap={{ scale: 0.9 }} onClick={onOpenEnergy} className={pill} aria-label="Energy">
-        {Array.from({ length: max }).map((_, i) => (
-          <span key={i} className={`text-lg ${i < current ? '' : 'opacity-30 grayscale'}`}>
-            ⚡
-          </span>
-        ))}
-        <span className="ml-0.5 font-display font-extrabold">
+        <span className="text-lg">⚡</span>
+        <span className="font-display font-extrabold">
           {current}/{max}
         </span>
         <span className="ml-0.5 text-xs opacity-70">＋</span>

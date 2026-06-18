@@ -76,22 +76,12 @@ export default function EnergySheet({ open, onClose }) {
                   : '#cbb9a3',
               }}
             >
-              {isFull ? (
-                'Energy full ⚡'
-              ) : canWatch ? (
-                <>
-                  ▶︎ Watch an ad for +1 ⚡
-                </>
-              ) : (
-                'Next free energy in ~6h'
-              )}
+              {isFull ? 'Energy full ⚡' : <>▶︎ Watch an ad for +1 ⚡</>}
             </motion.button>
             <p className="mt-2 text-center text-xs font-semibold text-ink-soft/70">
               {isFull
                 ? 'Your bolts are topped up.'
-                : canWatch
-                ? 'One free energy from an ad every 6 hours.'
-                : 'Come back later or go Pro for unlimited energy.'}
+                : 'Watch an ad any time to add a bolt — or go Pro for unlimited energy.'}
             </p>
           </motion.div>
         </>
