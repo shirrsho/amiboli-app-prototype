@@ -3,56 +3,68 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
-      // Warm, energetic, playful palette (Duolingo-ish energy)
+      // ── Amiboli brand palette (Brand Guidelines v1.2) ──
+      // Every colour has a defined role; never used interchangeably.
       colors: {
-        amber: {
-          DEFAULT: '#FF8A1F',
-        },
+        // PRIMARY · Story Violet — nav, buttons, primary surfaces.
+        // Mapped onto the `brand` scale so existing brand-* classes adopt it.
         brand: {
-          50: '#FFF4E6',
-          100: '#FFE6C7',
-          200: '#FFD199',
-          300: '#FFB35C',
-          400: '#FF9A33',
-          500: '#FF8A1F', // primary warm orange
-          600: '#F2730A',
-          700: '#C75A05',
-          800: '#9B470A',
-          900: '#7A390C',
+          50: '#EEEAFF', // violet xl (tints / chips)
+          100: '#E4E0FF',
+          200: '#D4C8E0',
+          300: '#9D90D8',
+          400: '#7C5CDB', // lavender (hover)
+          500: '#4A35B0', // Story Violet (primary)
+          600: '#3A28A0',
+          700: '#2D1F50',
+          800: '#26215C',
+          900: '#1A1040',
         },
-        grape: {
-          400: '#A78BFA',
-          500: '#8B5CF6',
-          600: '#7C3AED',
+        // MASCOT · Ami Teal — progress, secondary, book spine.
+        teal: {
+          light: '#A8F0E8',
+          DEFAULT: '#2ABFA8',
+          dark: '#1D9E86',
         },
-        leaf: {
-          400: '#4ADE80',
-          500: '#22C55E',
-          600: '#16A34A',
+        // REWARD · XP Gold — rewards, streaks, XP, brows.
+        gold: {
+          DEFAULT: '#FFD166',
+          dark: '#E8920A',
         },
-        sky: {
-          400: '#38BDF8',
-          500: '#0EA5E9',
+        coral: {
+          DEFAULT: '#D85A30', // tie / errors
         },
+        forest: '#2E7A48', // book cover
+        slate: '#1E3A6E', // teacher jacket
         ink: {
-          DEFAULT: '#2B2233',
-          soft: '#6B6275',
+          DEFAULT: '#1A1040', // text / dark bg
+          soft: '#5A4D8A', // secondary text
+          mute: '#9D90D8', // muted text
         },
-        cream: '#FFFBF5',
+        cream: '#F6F4FF', // app background
+        // legacy aliases kept so older class names still resolve sensibly
+        grape: { 400: '#7C5CDB', 500: '#4A35B0', 600: '#3A28A0' },
+        leaf: { 400: '#5BD6BE', 500: '#2ABFA8', 600: '#1D9E86' },
+        sky: { 400: '#5B8FD4', 500: '#1E3A6E' },
+        amber: { DEFAULT: '#FFD166' },
       },
       fontFamily: {
-        // Display = playful rounded; body = clean sans; serif = book prose on
-        // the story world Home. Loaded via Google Fonts in index.html.
-        display: ['"Baloo 2"', 'system-ui', 'sans-serif'],
+        // Nunito for UI energy. Lora for story reading. Never swapped.
+        display: ['Nunito', 'system-ui', 'sans-serif'],
         body: ['Nunito', 'system-ui', 'sans-serif'],
-        serif: ['"Crimson Text"', 'Georgia', 'serif'],
+        serif: ['Lora', 'Georgia', 'serif'],
       },
       boxShadow: {
-        soft: '0 8px 24px -8px rgba(43,34,51,0.18)',
-        node: '0 6px 0 0 rgba(0,0,0,0.12)',
-        pop: '0 12px 32px -10px rgba(255,138,31,0.55)',
+        soft: '0 8px 24px -8px rgba(26,16,64,0.18)',
+        node: '0 6px 0 0 rgba(26,16,64,0.12)',
+        pop: '0 12px 32px -10px rgba(74,53,176,0.45)',
       },
       borderRadius: {
+        // Brand radius tokens
+        chip: '4px',
+        btn: '8px',
+        card: '14px',
+        sheet: '22px',
         '4xl': '2rem',
       },
       keyframes: {

@@ -1,26 +1,28 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
+import Mascot from '../components/Mascot'
 
 // 3-slide swipeable onboarding. Reachable but skippable (Skip → Auth).
+// Ami (the mascot) guides each slide with a fitting mood.
 const slides = [
   {
-    emoji: '📖',
+    mood: 'talking',
     title: 'Live the story',
     body: 'Step inside classic tales and become part of the adventure.',
-    bg: 'from-grape-400 to-grape-600',
+    bg: 'from-brand-400 to-brand-600',
   },
   {
-    emoji: '🎤',
+    mood: 'thinking',
     title: 'Speak to move forward',
     body: 'Say your lines out loud — your voice drives the story onward.',
-    bg: 'from-sky-400 to-sky-500',
+    bg: 'from-teal to-teal-dark',
   },
   {
-    emoji: '🏆',
+    mood: 'celebrating',
     title: 'Get scored & climb',
-    body: 'Earn scores on every line and rise up the leaderboard.',
-    bg: 'from-brand-400 to-brand-600',
+    body: 'Earn XP on every line and rise up the leaderboard.',
+    bg: 'from-slate to-brand-900',
   },
 ]
 
@@ -57,13 +59,9 @@ export default function Onboarding() {
             transition={{ duration: 0.3 }}
             className="flex cursor-grab flex-col items-center text-center active:cursor-grabbing"
           >
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
-              className="mb-8 grid h-40 w-40 place-items-center rounded-[2.5rem] bg-white/20 text-8xl backdrop-blur"
-            >
-              {slides[i].emoji}
-            </motion.div>
+            <div className="mb-8 grid h-48 w-48 place-items-center rounded-[2.5rem] bg-white/15 backdrop-blur">
+              <Mascot mood={slides[i].mood} size={170} float />
+            </div>
             <h2 className="font-display text-3xl font-extrabold">{slides[i].title}</h2>
             <p className="mt-3 max-w-xs font-body text-lg font-semibold text-white/90">{slides[i].body}</p>
           </motion.div>

@@ -1,5 +1,5 @@
 // Initials avatar. Sizes are tailwind-friendly numbers (rem*4 px).
-export default function Avatar({ initials, color = '#FF8A1F', size = 40, ring = false }) {
+export default function Avatar({ initials, color = '#4A35B0', size = 40, ring = false }) {
   return (
     <div
       className={`flex shrink-0 items-center justify-center rounded-full font-display font-extrabold text-white ${

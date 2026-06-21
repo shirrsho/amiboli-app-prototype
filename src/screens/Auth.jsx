@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import Mascot from '../components/Mascot'
 
 // UI-only auth. No validation, no real auth — any "Continue" → Home.
 export default function Auth() {
@@ -17,16 +18,14 @@ export default function Auth() {
         animate={{ scale: 1, opacity: 1 }}
         className="mt-6 flex flex-col items-center"
       >
-        <div className="grid h-20 w-20 place-items-center rounded-[1.5rem] bg-brand-500 shadow-pop">
-          <span className="font-display text-4xl font-extrabold text-white">A</span>
-        </div>
-        <h1 className="mt-4 font-display text-3xl font-extrabold text-ink">Welcome back</h1>
+        <Mascot mood="happy" size={104} float />
+        <h1 className="mt-3 font-display text-3xl font-extrabold text-ink">Welcome back</h1>
         <p className="font-body font-semibold text-ink-soft">Log in to continue your story</p>
       </motion.div>
 
       {/* Form (non-functional) */}
       <form onSubmit={enter} className="mt-8 flex flex-col gap-3">
-        <Field label="Email" type="email" placeholder="aarav@email.com" />
+        <Field label="Email" type="email" placeholder="you@email.com" />
         <Field label="Password" type="password" placeholder="••••••••" />
 
         <motion.button

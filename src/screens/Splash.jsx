@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import Mascot from '../components/Mascot'
 
 // Animated logo splash. Auto-advances to Home after ~2s.
 // Onboarding/Auth remain reachable but are skipped by default (pre-logged-in).
@@ -25,20 +26,20 @@ export default function Splash() {
         />
       ))}
 
+      {/* Ami the Book — the primary logo mascot (green on violet bg) */}
       <motion.div
         initial={{ scale: 0, rotate: -20 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ type: 'spring', stiffness: 200, damping: 12 }}
-        className="grid h-28 w-28 place-items-center rounded-[2rem] bg-white shadow-2xl"
       >
-        <span className="font-display text-6xl font-extrabold text-brand-600">A</span>
+        <Mascot mood="excited" size={156} float />
       </motion.div>
 
       <motion.h1
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.35 }}
-        className="mt-6 font-display text-5xl font-extrabold tracking-tight"
+        className="mt-4 font-display text-5xl font-extrabold tracking-tight"
       >
         Amiboli
       </motion.h1>
@@ -48,7 +49,7 @@ export default function Splash() {
         transition={{ delay: 0.6 }}
         className="mt-1 font-body font-bold text-white/90"
       >
-        Live the story. Speak it out loud.
+        Learn English through stories.
       </motion.p>
 
       <motion.div

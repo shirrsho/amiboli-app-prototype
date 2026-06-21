@@ -15,8 +15,8 @@ body,
 body {
   margin: 0;
   font-family: 'Nunito', system-ui, sans-serif;
-  /* Subtle backdrop behind the phone frame on desktop */
-  background: radial-gradient(120% 120% at 50% 0%, #fff4e6 0%, #ffe6c7 45%, #ffd199 100%);
+  /* Subtle brand backdrop behind the phone frame on desktop */
+  background: radial-gradient(120% 120% at 50% 0%, #EEEAFF 0%, #E4E0FF 45%, #D4C8E0 100%);
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
 }

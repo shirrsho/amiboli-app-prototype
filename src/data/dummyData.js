@@ -8,7 +8,7 @@
 export const user = {
   name: 'Shirsho',
   initials: 'AA',
-  avatarColor: '#FF8A1F',
+  avatarColor: '#4A35B0',
   joinedDaysAgo: 24,
   joinedText: '24 days ago',
   plan: 'Free',
@@ -34,7 +34,7 @@ export const skills = [
   { key: 'relevance', label: 'Relevance', color: '#8B5CF6', emoji: '🎯' },
   { key: 'smoothness', label: 'Smoothness', color: '#0EA5E9', emoji: '🌊' },
   { key: 'clarity', label: 'Clarity', color: '#22C55E', emoji: '🔍' },
-  { key: 'grammar', label: 'Grammar', color: '#FF8A1F', emoji: '📐' },
+  { key: 'grammar', label: 'Grammar', color: '#D85A30', emoji: '📐' },
 ]
 
 // ── Books & scenes ──────────────────────────────────────────────────────────
@@ -53,6 +53,7 @@ export const books = [
     subtitle: 'A Sherlock Holmes story',
     pitch: 'Solve a murder alongside the world’s sharpest detective.',
     themeId: 'victorian-london',
+
     recapText:
       'Holmes hands you the telegram. “Lauriston Gardens,” he says. “There has been a murder — and this time, you do the talking.”',
     introText:
@@ -104,6 +105,7 @@ export const books = [
     subtitle: 'Inspired by the thriller',
     pitch: 'What you saw from the train window could solve a disappearance.',
     themeId: 'rail-dusk',
+
     recapText:
       'Every morning you watch the same house from the 8:04. Today the news says the woman who lives there is missing — and you may be the last stranger who saw her.',
     introText:
@@ -132,6 +134,7 @@ export const books = [
     subtitle: 'Inspired by the classic',
     pitch: 'A small town, a big trial, and a child who sees it all.',
     themeId: 'southern-summer',
+
     recapText:
       'The trial is the only thing anyone in town talks about — and tomorrow, you will sit in the gallery and hear it for yourself.',
     introText:
@@ -313,7 +316,7 @@ export const leaderboardUsers = [
   makeUser('Priya', 'PR', '#E11D48', 80, 78, 81, 81, 4520),
   makeUser('Yuki', 'YU', '#6366F1', 79, 77, 80, 80, 4360),
   // Shirsho — the active user (rank #14 by avg). isMe flag highlights the row.
-  { ...makeUser('Shirsho', 'AA', '#FF8A1F', 82, 64, 78, 88, 3920), isMe: true },
+  { ...makeUser('Shirsho', 'AA', '#4A35B0', 82, 64, 78, 88, 3920), isMe: true },
   makeUser('Tomas', 'TO', '#64748B', 74, 70, 76, 76, 3890),
 ]
 

@@ -72,8 +72,8 @@ export default function EnergySheet({ open, onClose }) {
               className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 font-display text-base font-extrabold text-white"
               style={{
                 background: canWatch
-                  ? 'linear-gradient(135deg, #FF9A33, #F2730A)'
-                  : '#cbb9a3',
+                  ? 'linear-gradient(135deg, #7C5CDB, #4A35B0)'
+                  : '#C7BFE0',
               }}
             >
               {isFull ? 'Energy full ⚡' : <>▶︎ Watch an ad for +1 ⚡</>}

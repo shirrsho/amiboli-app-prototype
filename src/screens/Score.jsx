@@ -204,7 +204,7 @@ export default function Score() {
 
         {/* ── Coaching ── */}
         <div className="mt-3">
-          <Card delay={0.3} className="flex gap-3">
+          <Card delay={0.3} className="flex items-center gap-3">
             <span className="text-2xl">🎯</span>
             <div>
               <p className="text-[12px] font-extrabold" style={{ color: p.textOnBg }}>

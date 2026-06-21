@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import HomeTopBar from '../components/HomeTopBar'
 import NotificationsSheet from '../components/NotificationsSheet'
 import EnergySheet from '../components/EnergySheet'
+import Mascot from '../components/Mascot'
 import Scenery from '../components/story/Scenery'
 import { useLibrary } from '../components/LibraryProvider'
 import { books } from '../data/dummyData'
@@ -56,7 +57,7 @@ export default function Home() {
 
         {/* Final section: get more from the store */}
         <section className="relative flex h-full snap-start flex-col items-center justify-center gap-3 px-10 text-center">
-          <span className="text-5xl">🛍️</span>
+          <Mascot mood="excited" size={150} float />
           <h2 className="font-serif text-3xl font-bold text-[#f3ead9]">Want more stories?</h2>
           <p className="text-sm font-bold text-[#f3ead9]/55">Browse premium books in the Store</p>
           <motion.button

@@ -6,8 +6,8 @@ export default function ProgressRing({
   max = 100,
   size = 64,
   stroke = 7,
-  color = '#FF8A1F',
-  track = '#FFE6C7',
+  color = '#4A35B0',
+  track = '#E4E0FF',
   children,
 }) {
   const r = (size - stroke) / 2

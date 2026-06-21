@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 // Celebratory streak-up animation for the result screen: the flame pops in,
 // the count rolls from `from` → `to`, sparks burst outward, and a ring of the
 // week's days lights up. Transforms/opacity only.
-export default function StreakBurst({ from, to, color = '#FF8A1F' }) {
+export default function StreakBurst({ from, to, color = '#FFD166' }) {
   const [n, setN] = useState(from)
   const [burst, setBurst] = useState(false)
 
