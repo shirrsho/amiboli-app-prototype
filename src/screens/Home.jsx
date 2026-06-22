@@ -6,6 +6,7 @@ import NotificationsSheet from '../components/NotificationsSheet'
 import EnergySheet from '../components/EnergySheet'
 import Mascot from '../components/Mascot'
 import Scenery from '../components/story/Scenery'
+import BookCharacter from '../components/story/BookCharacter'
 import { useLibrary } from '../components/LibraryProvider'
 import { books } from '../data/dummyData'
 import { getTheme } from '../data/bookThemes'
@@ -99,6 +100,11 @@ function BookSection({ book, onOpen }) {
   return (
     <section className="relative h-full cursor-pointer snap-start overflow-hidden" onClick={onOpen}>
       <Scenery theme={theme} ambient={false} />
+
+      {/* Big, gently-moving story character fronting the book */}
+      <div className="pointer-events-none absolute inset-x-0 top-[12%] z-10 flex justify-center">
+        <BookCharacter bookId={book.id} theme={theme} height={310} />
+      </div>
 
       {/* Content cluster, bottom-anchored on a frosted panel */}
       <div className="relative z-10 flex h-full flex-col justify-end px-5 pb-9">
