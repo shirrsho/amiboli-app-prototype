@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { useEnergy } from './EnergyProvider'
 
 // Top sheet that drops down when the energy pill is tapped. Shows current
-// energy and a "watch an ad to add 1 ⚡" action (once every ~6 hours).
+// energy and a "watch an ad to add 1 ⚡" action (Free: up to 2 ads a day).
 export default function EnergySheet({ open, onClose }) {
   const navigate = useNavigate()
-  const { current, max, isFull, canWatch } = useEnergy()
+  const { current, max, isFull, canWatch, adsLeft, adsPerDay, limitReached } = useEnergy()
 
   const watchAd = () => {
     onClose()
@@ -76,12 +76,18 @@ export default function EnergySheet({ open, onClose }) {
                   : '#C7BFE0',
               }}
             >
-              {isFull ? 'Energy full ⚡' : <>▶︎ Watch an ad for +1 ⚡</>}
+              {isFull
+                ? 'Energy full ⚡'
+                : limitReached
+                ? "You're out of ad energy for today"
+                : `▶︎ Watch an ad for +1 ⚡ · ${adsLeft} left today`}
             </motion.button>
             <p className="mt-2 text-center text-xs font-semibold text-ink-soft/70">
               {isFull
                 ? 'Your bolts are topped up.'
-                : 'Watch an ad any time to add a bolt — or go Pro for unlimited energy.'}
+                : limitReached
+                ? `Free: up to ${adsPerDay} energy ads a day. Come back tomorrow — or go Pro for unlimited energy.`
+                : `Free: up to ${adsPerDay} energy ads a day — or go Pro for unlimited energy.`}
             </p>
           </motion.div>
         </>

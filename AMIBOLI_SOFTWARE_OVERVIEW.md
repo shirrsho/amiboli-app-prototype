@@ -42,7 +42,7 @@ stories and speak their lines out loud.
 5. **Every performance is recorded** — each spoken line's scores and each completed scene's result are saved for the user.
 
 ## 6. Progress, energy, streaks, points
-1. **Energy:** users have a limited number of energy bolts; each scene costs one. Energy refills over time; users can **watch an ad to gain energy**. Pro users get unlimited energy.
+1. **Energy:** users have a limited number of energy bolts; each scene costs one. Energy refills over time. A Free user can **watch an ad to gain energy — at most 2 ads per day**. Pro users get unlimited energy (and no ads).
 2. **Streak:** completing a scene each day keeps a daily streak alive.
 3. **Points (XP):** each completed scene earns points based on the score; points add up to a running total.
 4. After a scene, the user sees a **results screen**: their score, points earned, streak increase, a skill breakdown, their best line, and a coaching tip.
@@ -60,8 +60,9 @@ stories and speak their lines out loud.
 4. **For now purchasing is a placeholder.** Later it uses real payments.
 
 ## 9. Ads
-1. Free users see ads in two places: to **gain extra energy**, and when **leaving a scene early**.
-2. Pro users see no ads.
+1. Ads appear in **one place only**: a Free user can **watch an ad to gain energy**, up to **2 ads per day**.
+2. There are **no ads anywhere else** — none after finishing a scene, leaving a scene, or on any other screen.
+3. Pro users see no ads at all.
 
 ## 10. Profile, notifications & settings
 1. The user's **profile** shows their stats: scenes completed, speaking time, average score, rank, skill levels, strengths/weaknesses, and coaching suggestions.
